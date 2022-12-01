@@ -9,6 +9,8 @@ import (
 )
 
 func routes(app *config.AppConfig) http.Handler {
+	// muxer from https://github.com/bmizerany/pat
+	// which is a Sinatra style pattern muxer for Go's net/http library
 	mux := pat.New()
 
 	mux.Get("/", http.HandlerFunc(handlers.Repo.Home))
