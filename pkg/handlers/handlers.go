@@ -3,9 +3,9 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/scottwcode/bookings-app/pkg/config"
-	"github.com/scottwcode/bookings-app/pkg/models"
-	"github.com/scottwcode/bookings-app/pkg/render"
+	"github.com/scottwcode/go-bookings-app/pkg/config"
+	"github.com/scottwcode/go-bookings-app/pkg/models"
+	"github.com/scottwcode/go-bookings-app/pkg/render"
 )
 
 // Repo is a repository used by the handlers
@@ -35,11 +35,11 @@ func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 
 // About is the handler for the about page
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
-	// peform some logic
+	// create some test data to sent to the template
 	stringMap := make(map[string]string)
 	stringMap["test"] = "Hello, again."
 
-	// send the date to the template
+	// send the data to the template
 	render.RenderTemplate(w, "about.page.tmpl", &models.TemplateData{StringMap: stringMap})
 
 }

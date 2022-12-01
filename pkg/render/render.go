@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"text/template"
 
-	"github.com/scottwcode/bookings-app/pkg/config"
-	"github.com/scottwcode/bookings-app/pkg/models"
+	"github.com/scottwcode/go-bookings-app/pkg/config"
+	"github.com/scottwcode/go-bookings-app/pkg/models"
 )
 
 var functions = template.FuncMap{}
@@ -19,6 +19,12 @@ var app *config.AppConfig
 // NewTemplates sets the config for the template package
 func NewTemplates(a *config.AppConfig) {
 	app = a
+}
+
+// AddDefaultData
+func AddDefaultData(td *models.TemplateData) *models.TemplateData {
+
+	return td
 }
 
 // RenderTemplate renders different html templates
@@ -42,6 +48,8 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData)
 
 	// finer grained error checking
 	buf := new(bytes.Buffer)
+
+	td = AddDefaultData(td)
 
 	_ = t.Execute(buf, td)
 
