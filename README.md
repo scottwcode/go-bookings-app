@@ -1,1 +1,1 @@
-# go-bookings-app
+# go-bnb-bookings
