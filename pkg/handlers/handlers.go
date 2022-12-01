@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/scottwcode/bookings-app/pkg/config"
+	"github.com/scottwcode/bookings-app/pkg/models"
 	"github.com/scottwcode/bookings-app/pkg/render"
 )
 
@@ -29,11 +30,16 @@ func NewHandlers(r *Repository) {
 
 // Home is the handler for the home page
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "home.page.tmpl")
+	render.RenderTemplate(w, "home.page.tmpl", &models.TemplateData{})
 }
 
 // About is the handler for the about page
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "about.page.tmpl")
+	// peform some logic
+	stringMap := make(map[string]string)
+	stringMap["test"] = "Hello, again."
+
+	// send the date to the template
+	render.RenderTemplate(w, "about.page.tmpl", &models.TemplateData{StringMap: stringMap})
 
 }

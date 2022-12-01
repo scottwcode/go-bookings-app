@@ -9,6 +9,7 @@ import (
 	"text/template"
 
 	"github.com/scottwcode/bookings-app/pkg/config"
+	"github.com/scottwcode/bookings-app/pkg/models"
 )
 
 var functions = template.FuncMap{}
@@ -21,7 +22,7 @@ func NewTemplates(a *config.AppConfig) {
 }
 
 // RenderTemplate renders different html templates
-func RenderTemplate(w http.ResponseWriter, tmpl string) {
+func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
 
 	var tc map[string]*template.Template
 
@@ -42,7 +43,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl string) {
 	// finer grained error checking
 	buf := new(bytes.Buffer)
 
-	_ = t.Execute(buf, nil)
+	_ = t.Execute(buf, td)
 
 	// render the template
 	_, err := buf.WriteTo(w)
