@@ -5,9 +5,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/scottwcode/go-bookings-app/pkg/config"
-	"github.com/scottwcode/go-bookings-app/pkg/handlers"
-	"github.com/scottwcode/go-bookings-app/pkg/render"
+	"github.com/scottwcode/bookings-app/pkg/config"
+	"github.com/scottwcode/bookings-app/pkg/handlers"
+	"github.com/scottwcode/bookings-app/pkg/render"
 )
 
 const portNumber = ":8080"
@@ -29,9 +29,17 @@ func main() {
 
 	render.NewTemplates(&app)
 
-	http.HandleFunc("/", handlers.Repo.Home)
-	http.HandleFunc("/about", handlers.Repo.About)
+	// http.HandleFunc("/", handlers.Repo.Home)
+	// http.HandleFunc("/about", handlers.Repo.About)
 
 	fmt.Printf("Starting application on port %s", portNumber)
-	_ = http.ListenAndServe(portNumber, nil)
+	// _ = http.ListenAndServe(portNumber, nil)
+
+	srv := &http.Server{
+		Addr:    portNumber,
+		Handler: routes(&app),
+	}
+
+	err = srv.ListenAndServe()
+	log.Fatal(err)
 }

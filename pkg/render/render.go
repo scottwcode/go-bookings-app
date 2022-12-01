@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"text/template"
 
-	"github.com/scottwcode/go-bookings-app/pkg/config"
-	"github.com/scottwcode/go-bookings-app/pkg/models"
+	"github.com/scottwcode/bookings-app/pkg/config"
+	"github.com/scottwcode/bookings-app/pkg/models"
 )
 
 var functions = template.FuncMap{}
@@ -72,7 +72,7 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 		return myCache, err
 	}
 
-	// range through files ending with *.page.tmpl
+	// range through slice containing files ending with *.page.tmpl
 	for _, page := range pages {
 		name := filepath.Base(page)
 		ts, err := template.New(name).ParseFiles(page)
